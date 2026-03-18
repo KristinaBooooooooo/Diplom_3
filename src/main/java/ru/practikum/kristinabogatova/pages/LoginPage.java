@@ -37,11 +37,6 @@ public class LoginPage extends BasePage {
         type(EMAIL_INPUT, email);
         type(PASSWORD_INPUT, password);
         click(LOGIN_BUTTON);
-        // Ждём результата: либо редирект на /account, либо появление "Личный Кабинет" в хэдере
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12));
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.urlContains("account")
-        ));
     }
 
     /**

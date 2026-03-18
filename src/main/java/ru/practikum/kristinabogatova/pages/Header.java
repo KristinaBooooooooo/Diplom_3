@@ -2,9 +2,6 @@ package ru.practikum.kristinabogatova.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Header extends BasePage {
 
@@ -25,9 +22,5 @@ public class Header extends BasePage {
 
     public boolean isPersonalAccountDisplayed() {
         return isDisplayed(PERSONAL_ACCOUNT);
-    }
-
-    public ExpectedCondition<WebElement> isVisibleAccount() {
-        return ExpectedConditions.visibilityOfElementLocated(Header.PERSONAL_ACCOUNT);
     }
 }
