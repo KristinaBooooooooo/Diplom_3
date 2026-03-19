@@ -6,24 +6,21 @@ import ru.practikum.kristinabogatova.utils.GlobalConst;
 
 public class MainPage extends BasePage {
 
-    // вкладки конструктора
+    // локаторы
     private static final By BUNS_TAB = By.xpath("//span[text()='Булки']");
     private static final By SAUCES_TAB = By.xpath("//span[text()='Соусы']");
     private static final By FILLINGS_TAB = By.xpath("//span[text()='Начинки']");
-
-    // кнопка "Войти в аккаунт" на главной
-    private final By loginButton = By.xpath("//button[text()='Войти в аккаунт']");
+    private static final By LOGIN_BUTTON = By.xpath("//button[text()='Войти в аккаунт']");
+    private static final By ORDER_BUTTON = By.xpath("//button[text()='Оформить заказ']");
 
     public MainPage(WebDriver driver) {
         super(driver);
     }
 
-    // открыть главную страницу
-    public void open() {
+    public void openPage() {
         driver.get(GlobalConst.BASE_URL);
     }
 
-    // вкладки конструктора
     public void clickBuns() {
         click(BUNS_TAB);
     }
@@ -36,8 +33,17 @@ public class MainPage extends BasePage {
         click(FILLINGS_TAB);
     }
 
-    // вход с главной страницы
     public void clickLoginButton() {
-        click(loginButton);
+        click(LOGIN_BUTTON);
+    }
+
+    // отображается кнопка входа
+    public boolean isDisplayedLoginButton() {
+        return isDisplayed(LOGIN_BUTTON);
+    }
+
+    // отображается кнопка оформления заказа
+    public boolean isDisplayedOrderButton() {
+        return isDisplayed(ORDER_BUTTON);
     }
 }

@@ -9,10 +9,10 @@ public class UserDataGenerator {
     }
 
     public static String getPassword() {
-        return "123456";
+        return "123456" + UUID.randomUUID().toString().substring(0,5);
     }
 
     public static String getName() {
-        return "Kristina";
+        return "Kristina " + UUID.randomUUID().toString().substring(0, 5);
     }
 }

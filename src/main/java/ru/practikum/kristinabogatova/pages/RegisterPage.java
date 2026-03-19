@@ -5,15 +5,21 @@ import org.openqa.selenium.WebDriver;
 
 public class RegisterPage extends BasePage {
 
+    // локаторы
     private static final By NAME_INPUT = By.xpath("//label[text()='Имя']/following-sibling::input");
     private static final By EMAIL_INPUT = By.xpath("//label[text()='Email']/following-sibling::input");
     private static final By PASSWORD_INPUT = By.xpath("//label[text()='Пароль']/following-sibling::input");
     private static final By REGISTER_BUTTON = By.xpath("//button[text()='Зарегистрироваться']");
+    private static final By LOGIN_LINK = By.xpath("//a[text()='Войти']");
 
     private static final By PASSWORD_ERROR = By.xpath("//p[contains(@class,'input__error') and (contains(.,'пароль') or contains(.,'Пароль'))]");
 
     public RegisterPage(WebDriver driver) {
         super(driver);
+    }
+
+    public boolean waitForPage() {
+        return isDisplayed(REGISTER_BUTTON);
     }
 
     /**
@@ -37,5 +43,9 @@ public class RegisterPage extends BasePage {
 
     public boolean isPasswordErrorDisplayed() {
         return isDisplayed(PASSWORD_ERROR);
+    }
+
+    public void clickLoginLink() {
+        click(LOGIN_LINK);
     }
 }

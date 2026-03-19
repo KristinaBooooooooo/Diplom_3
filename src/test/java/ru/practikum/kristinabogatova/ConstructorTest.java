@@ -31,7 +31,7 @@ public class ConstructorTest {
     @Before
     public void setUp() {
         mainPage = new MainPage(WebDriverUtils.create(this.browser));
-        mainPage.open();
+        mainPage.openPage();
     }
 
     @Test
