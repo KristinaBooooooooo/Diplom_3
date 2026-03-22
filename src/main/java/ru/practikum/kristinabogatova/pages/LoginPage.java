@@ -1,5 +1,6 @@
 package ru.practikum.kristinabogatova.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,32 +17,24 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    /**
-     * Ожидание загрузки страницы логина (ждём видимости кнопки входа).
-     */
+    @Step("Дождаться открытия страницы")
     public boolean waitForPage() {
         return isDisplayed(LOGIN_BUTTON);
     }
 
-    /**
-     * Выполнить логин: заполнить email, пароль и кликнуть Войти.
-     */
+    @Step("Войти в аккаунт")
     public void login(String email, String password) {
         type(EMAIL_INPUT, email);
         type(PASSWORD_INPUT, password);
         click(LOGIN_BUTTON);
     }
 
-    /**
-     * Перейти по ссылке "Зарегистрироваться".
-     */
+    @Step("Перейти к регистрации")
     public void clickRegisterLink() {
         click(REGISTER_LINK);
     }
 
-    /**
-     * Перейти по ссылке "Восстановить пароль".
-     */
+    @Step("Перейти к восстановлению пароля")
     public void clickForgotPasswordLink() {
         click(FORGOT_PASSWORD_LINK);
     }

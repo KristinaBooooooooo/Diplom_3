@@ -1,44 +1,51 @@
 package ru.practikum.kristinabogatova;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import ru.practikum.kristinabogatova.pages.MainPage;
 import ru.practikum.kristinabogatova.utils.WebDriverUtils;
 
-import java.util.Collection;
-import java.util.List;
+import static org.junit.Assert.assertTrue;
 
-import static ru.practikum.kristinabogatova.utils.GlobalConst.*;
-
-@RunWith(Parameterized.class)
 public class ConstructorTest {
 
     private MainPage mainPage;
 
-    @Parameterized.Parameter(0) public String browser;
-
-    @Parameterized.Parameters(name = "{0}")
-    public static Collection<Object[]> data() {
-        return List.<Object[]>of(
-                new Object[] {CHROME},
-                new Object[] {YANDEX}
-        );
-    }
-
     @Before
     public void setUp() {
-        mainPage = new MainPage(WebDriverUtils.create(this.browser));
+        mainPage = new MainPage(WebDriverUtils.create());
         mainPage.openPage();
     }
 
     @Test
-    public void constructorTabsTest() {
+    @DisplayName("Раздел Конструктор, переход на вкладку Булки")
+    @Description("Проверяет, что вкладка Булки становится активной после перехода")
+    public void constructorBunsTabTest() {
         mainPage.clickSauces();
-        mainPage.clickFillings();
         mainPage.clickBuns();
+
+        assertTrue("Вкладка Булки должна быть активной", mainPage.isBunsTabActive());
+    }
+
+    @Test
+    @DisplayName("Раздел Конструктор, переход на вкладку Соусы")
+    @Description("Проверяет, что вкладка Соусы становится активной после перехода")
+    public void constructorSaucesTabTest() {
+        mainPage.clickSauces();
+
+        assertTrue("Вкладка Соусы должна быть активной", mainPage.isSaucesTabActive());
+    }
+
+    @Test
+    @DisplayName("Раздел Конструктор, переход на вкладку Начинки")
+    @Description("Проверяет, что вкладка Начинки становится активной после перехода")
+    public void constructorFillingsTabTest() {
+        mainPage.clickFillings();
+
+        assertTrue("Вкладка Начинки должна быть активной", mainPage.isFillingsTabActive());
     }
 
     @After

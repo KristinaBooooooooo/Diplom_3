@@ -3,15 +3,17 @@ package ru.practikum.kristinabogatova.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 
 import java.time.Duration;
 
 public class WebDriverUtils {
 
     // Метод для создания драйвера в зависимости от браузера
-    public static WebDriver create(String browser) {
+    public static WebDriver create() {
+        return create(resolveBrowser());
+    }
+
+    private static WebDriver create(String browser) {
         WebDriver driver;
 
         switch (browser.toLowerCase()) {
@@ -28,12 +30,23 @@ public class WebDriverUtils {
             default:
                 throw new IllegalArgumentException("Браузер не поддерживается: " + browser);
         }
-
         // Настройка таймаутов
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 
         return driver;
+    }
+
+    private static String resolveBrowser() {
+        String browser = System.getProperty("browser");
+        if (browser != null && !browser.isBlank()) {
+            return browser;
+        }
+        browser = System.getenv("BROWSER");
+        if (browser != null && !browser.isBlank()) {
+            return browser;
+        }
+        return GlobalConst.CHROME;
     }
 
     private static WebDriver yandexDriver() {
@@ -42,8 +55,6 @@ public class WebDriverUtils {
         options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
         options.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(options);
-//        driver.get("https://yandex.ru");
         return driver;
     }
-
 }

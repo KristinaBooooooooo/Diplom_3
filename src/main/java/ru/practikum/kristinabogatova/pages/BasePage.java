@@ -37,7 +37,10 @@ public class BasePage {
         return element.getText();
     }
 
-    // Метод проверки, что элемент отображается
+    protected boolean waitForAttributeContains(By locator, String attributeName, String value) {
+        return wait.until(ExpectedConditions.attributeContains(locator, attributeName, value));
+    }
+
     protected boolean isDisplayed(By locator) {
         try {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();

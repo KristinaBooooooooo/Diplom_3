@@ -1,27 +1,34 @@
 package ru.practikum.kristinabogatova.api;
 
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import java.util.HashMap;
-import java.util.Map;
+import ru.practikum.kristinabogatova.model.UserRequest;
+import ru.practikum.kristinabogatova.utils.Endpoints;
+
+import static ru.practikum.kristinabogatova.utils.GlobalConst.BASE_URL;
 
 public class UserClient {
-
-    private final String BASE_URL = "https://stellarburgers.education-services.ru/api";
 
     public UserClient() {
         RestAssured.baseURI = BASE_URL;
     }
 
+    @Step("Создать пользователя через API")
     public Response createUser(String email, String password, String name) {
-        Map<String, String> body = new HashMap<>();
-        body.put("email", email);
-        body.put("password", password);
-        body.put("name", name);
-
+        UserRequest body = new UserRequest(email, password, name);
         return RestAssured.given()
-                .header("Content-type", "application/json")
+                .contentType(ContentType.JSON)
                 .body(body)
-                .post("/auth/register");
+                .post(Endpoints.API_REGISTER_PATH);
+    }
+
+    @Step("Удалить пользователя через API")
+    public Response deleteUser(String accessToken) {
+        if (accessToken == null) return null;
+        return RestAssured.given()
+                .header("Authorization", accessToken)
+                .delete(Endpoints.API_USER_PATH);
     }
 }

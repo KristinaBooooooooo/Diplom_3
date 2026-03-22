@@ -1,5 +1,6 @@
 package ru.practikum.kristinabogatova.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -12,11 +13,12 @@ public class ProfilePage extends BasePage {
         super(driver);
     }
 
-    // Отображается кнопка выхода
+    @Step("Дождаться открытия страницы")
     public boolean waitForPage() {
         return isDisplayed(LOGOUT_BUTTON);
     }
 
+    @Step("Выйти из аккаунта")
     public void clickLogout() {
         click(LOGOUT_BUTTON);
     }

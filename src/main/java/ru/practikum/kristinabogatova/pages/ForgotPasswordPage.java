@@ -1,7 +1,9 @@
 package ru.practikum.kristinabogatova.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import ru.practikum.kristinabogatova.utils.Endpoints;
 import ru.practikum.kristinabogatova.utils.GlobalConst;
 
 public class ForgotPasswordPage extends BasePage {
@@ -14,14 +16,17 @@ public class ForgotPasswordPage extends BasePage {
         super(driver);
     }
 
+    @Step("Открыть страницу восстановления пароля")
     public void openPage() {
-        driver.get(GlobalConst.BASE_URL + "/forgot-password");
+        driver.get(GlobalConst.BASE_URL + Endpoints.FORGOT_PASSWORD);
     }
 
+    @Step("Дождаться открытия страницы")
     public boolean waitForPage() {
         return isDisplayed(RECOVER_BUTTON);
     }
 
+    @Step("Перейти на страницу входа")
     public void clickLoginLink() {
         click(LOGIN_LINK);
     }
