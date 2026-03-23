@@ -18,7 +18,7 @@ public class ForgotPasswordPage extends BasePage {
 
     @Step("Открыть страницу восстановления пароля")
     public void openPage() {
-        driver.get(GlobalConst.BASE_URL + Endpoints.FORGOT_PASSWORD);
+        driver.get(GlobalConst.BASE_URL + Endpoints.FORGOT_PASSWORD_PATH);
     }
 
     @Step("Дождаться открытия страницы")
